@@ -34,5 +34,15 @@ Open the command prompt and navigate to the python folder and type the following
 
 * __pip install robotframework-seleniumlibrary__
 
+__3. Integrate to jenkins__
+![image](https://github.com/user-attachments/assets/5d5ac296-3548-453d-ae41-fdaca104f9ee)
+![image](https://github.com/user-attachments/assets/02edb6a5-258b-4cf2-b9da-17463638ffb2)
+
+__4. Email Notifications after Execution__
+![image](https://github.com/user-attachments/assets/3e03b843-2ce4-4ca6-8346-41d0343e205f)
+
+
+
+
 
 

@@ -3,7 +3,7 @@ Sample Test automation framework in Robot framework and python
 
 Introduction
 ------
-* The RobotFramework_BAU is designed using Robot Framework
+* The Test Automation Framework is designed using Robot Framework
 * Robot Framework is a generic open-source automation framework. It can be used for test automation and robotic process automation (RPA).
 * Robot Framework is open and extensible. Robot Framework can be integrated with virtually any other tool to create powerful and flexible automation solutions. 
 * Robot Framework is free to use without licensing costs.
@@ -37,6 +37,10 @@ Open the command prompt and navigate to the python folder and type the following
 __3. Integrate to jenkins__
 ![image](https://github.com/user-attachments/assets/5d5ac296-3548-453d-ae41-fdaca104f9ee)
 ![image](https://github.com/user-attachments/assets/02edb6a5-258b-4cf2-b9da-17463638ffb2)
+![image](https://github.com/user-attachments/assets/ebe9f37a-48ae-4ab1-b703-a1e52cc0edc3)
+![image](https://github.com/user-attachments/assets/d766a1b3-eedd-4753-9e00-699c5632b5d4)
+
+
 
 __4. Email Notifications after Execution__
 ![image](https://github.com/user-attachments/assets/3e03b843-2ce4-4ca6-8346-41d0343e205f)

@@ -1,0 +1,9 @@
+Expected visited points		Actual visited points		Test result
+(-3.0, -149.0)		(-3.0, -149.0)		PASS
+(4.0, 150.0)		(4.0, 150.0)		PASS
+(170.0, 150.0)		(170.0, 150.0)		FAIL (Out of bounds)
+(150.0, -155.0)		(0.0, 0.0)		FAIL (Unexpected point)
+(-6.0, 160.0)		error		FAIL (System error)
+(-4.0, -150.0)		(150.0, -155.0)		FAIL (Out of bounds)
+(-4.23, -150.56)		(-6.0, 160.0)		FAIL (Out of bounds)
+(0.045, 0.001)		(-4.0, -150.0)		FAIL (Unexpected point)

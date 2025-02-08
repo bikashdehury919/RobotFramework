@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Test" tests="1" errors="0" failures="0" skipped="0" time="0.048" timestamp="2025-02-08T20:33:29.957000">
+<testcase classname="Test" name="TC01_Verify Points Are Inside Rectangle" time="0.016">
+</testcase>
+<properties>
+<property name="Documentation" value="Test cases for Robot Framework automation"/>
+</properties>
+</testsuite>

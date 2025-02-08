@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.11.2 on win32)" generated="20250208 20:33:29.957" rpa="false" schemaversion="3">
+<suite id="s1" name="Test" source="C:\Users\Bikash\PycharmProjects\TestAutomationFramework\Tests\test.robot">
+<test id="s1-t1" name="TC01_Verify Points Are Inside Rectangle" line="9">
+<kw name="Parse the input text file" library="CustomLibrary">
+<var>${rectangle}</var>
+<var>${points}</var>
+<arg>${input_path}</arg>
+<doc>Reads and extracts from the input file.</doc>
+<msg timestamp="20250208 20:33:29.989" level="INFO">${rectangle} = [(-4.0, -150.0), (-4.0, 150.0), (160.0, -150.0), (160.0, 150.0)]</msg>
+<msg timestamp="20250208 20:33:29.989" level="INFO">${points} = [(-3.0, -149.0), (4.0, 150.0), (170.0, 150.0), (150.0, -155.0), (-6.0, 160.0), (-4.0, -150.0), (-4.23, -150.56), (0.045, 0.001)]</msg>
+<status status="PASS" starttime="20250208 20:33:29.989" endtime="20250208 20:33:29.989"/>
+</kw>
+<kw name="Parse the output text file" library="CustomLibrary">
+<var>${actual_points}</var>
+<arg>${output_path}</arg>
+<doc>Reads the visited points from the output file.</doc>
+<msg timestamp="20250208 20:33:29.989" level="INFO">${actual_points} = [(-3.0, -149.0), (4.0, 150.0), (170.0, 150.0), (0.0, 0.0), 'error', (150.0, -155.0), (-6.0, 160.0), (-4.0, -150.0), (4.0, 150.0), (-4.23, -150.56), (160.0, -150.0)]</msg>
+<status status="PASS" starttime="20250208 20:33:29.989" endtime="20250208 20:33:29.989"/>
+</kw>
+<kw name="Validate Points" library="CustomLibrary">
+<var>${results}</var>
+<arg>${points}</arg>
+<arg>${actual_points}</arg>
+<arg>${rectangle}</arg>
+<doc>Validates that the visited points match the expected and stay within the rectangle.</doc>
+<msg timestamp="20250208 20:33:30.005" level="INFO">${results} = {'result': 'FAIL', 'details': ['(-3.0, -149.0)\t\t(-3.0, -149.0)\t\tPASS', '(4.0, 150.0)\t\t(4.0, 150.0)\t\tPASS', '(170.0, 150.0)\t\t(170.0, 150.0)\t\tFAIL (Out of bounds)', '(150.0, -155.0)\t\t(0.0,...</msg>
+<status status="PASS" starttime="20250208 20:33:30.005" endtime="20250208 20:33:30.005"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${results}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20250208 20:33:30.005" level="INFO">{'result': 'FAIL', 'details': ['(-3.0, -149.0)\t\t(-3.0, -149.0)\t\tPASS', '(4.0, 150.0)\t\t(4.0, 150.0)\t\tPASS', '(170.0, 150.0)\t\t(170.0, 150.0)\t\tFAIL (Out of bounds)', '(150.0, -155.0)\t\t(0.0, 0.0)\t\tFAIL (Unexpected point)', '(-6.0, 160.0)\t\terror\t\tFAIL (System error)', '(-4.0, -150.0)\t\t(150.0, -155.0)\t\tFAIL (Out of bounds)', '(-4.23, -150.56)\t\t(-6.0, 160.0)\t\tFAIL (Out of bounds)', '(0.045, 0.001)\t\t(-4.0, -150.0)\t\tFAIL (Unexpected point)', 'MISSING\t\t(4.0, 150.0)\t\tFAIL (Missing expected point)', 'MISSING\t\t(-4.23, -150.56)\t\tFAIL (Missing expected point)', 'MISSING\t\t(160.0, -150.0)\t\tFAIL (Missing expected point)']}</msg>
+<status status="PASS" starttime="20250208 20:33:30.005" endtime="20250208 20:33:30.005"/>
+</kw>
+<kw name="Log Result to Text File" library="CustomLibrary">
+<arg>${results}</arg>
+<arg>${TEST_NAME}</arg>
+<doc>Writes the validation results to a file.
+:param results:
+:param TCName:</doc>
+<msg timestamp="20250208 20:33:30.005" level="INFO">Test FAILED. Check test_results_TC01_Verify Points Are Inside Rectangle.txt for details in Reports folder.</msg>
+<status status="PASS" starttime="20250208 20:33:30.005" endtime="20250208 20:33:30.005"/>
+</kw>
+<doc>Validate if points are correctly within the rectangle</doc>
+<status status="PASS" starttime="20250208 20:33:29.989" endtime="20250208 20:33:30.005"/>
+</test>
+<doc>Test cases for Robot Framework automation</doc>
+<status status="PASS" starttime="20250208 20:33:29.957" endtime="20250208 20:33:30.005"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Test">Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

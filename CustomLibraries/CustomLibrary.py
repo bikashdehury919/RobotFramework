@@ -76,9 +76,20 @@ class CustomLibrary:
         results = []
         pass_criteria = True
 
-        for exp, act in zip(expected_points, actual_points):
+        max_len = max(len(expected_points), len(actual_points))  # Handle different lengths
+
+        for i in range(max_len):
+            exp = expected_points[i] if i < len(expected_points) else "MISSING"
+            act = actual_points[i] if i < len(actual_points) else "EXTRA"
+
             if act == "error":
                 results.append(f"{exp}\t\t{act}\t\tFAIL (System error)")
+                pass_criteria = False
+            elif act == "EXTRA":
+                results.append(f"{exp}\t\t{act}\t\tFAIL (Extra unexpected point)")
+                pass_criteria = False
+            elif exp == "MISSING":
+                results.append(f"{exp}\t\t{act}\t\tFAIL (Missing expected point)")
                 pass_criteria = False
             elif not self.is_within_rectangle(act, rectangle):
                 results.append(f"{exp}\t\t{act}\t\tFAIL (Out of bounds)")
@@ -104,6 +115,6 @@ class CustomLibrary:
             file.write("\n".join(results["details"]))
 
         if results["result"] == "FAIL":
-            print("Test FAILED. Check test_results.txt for details.")
+            print("Test FAILED. Check test_results_"+tcName+".txt for details in Reports folder.")
         else:
             print("Test PASSED.")

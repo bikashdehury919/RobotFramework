@@ -7,3 +7,6 @@ Expected visited points		Actual visited points		Test result
 (-4.0, -150.0)		(150.0, -155.0)		FAIL (Out of bounds)
 (-4.23, -150.56)		(-6.0, 160.0)		FAIL (Out of bounds)
 (0.045, 0.001)		(-4.0, -150.0)		FAIL (Unexpected point)
+MISSING		(4.0, 150.0)		FAIL (Missing expected point)
+MISSING		(-4.23, -150.56)		FAIL (Missing expected point)
+MISSING		(160.0, -150.0)		FAIL (Missing expected point)

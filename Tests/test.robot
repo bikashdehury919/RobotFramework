@@ -1,15 +1,15 @@
 *** Settings ***
+Documentation    Test cases for Robot Framework automation
 
 Library           ../CustomLibraries/CustomLibrary.py
+Resource          ../Configuration/Config.robot
 
-*** Variables ***
-${inputpath}    ./Resource/system_input_file.1630412935.txt
-${outputpath}    ./Resource/system_ouput_file.1630412935.txt
 
 *** Test Cases ***
-TC01
-    ${rectangle}  ${points}   Parse The Input Text File     ${inputpath}
-    ${actual_points}          Parse The Output Text File    ${outputpath}
+TC01_Verify Points Are Inside Rectangle
+    [Documentation]     Validate if points are correctly within the rectangle
+    ${rectangle}  ${points}   Parse The Input Text File     ${input_path}
+    ${actual_points}          Parse The Output Text File    ${output_path}
     ${results}                Validate Points    ${points}  ${actual_points}  ${rectangle}
     Log    ${results}
     Log Result to Text File   ${results}  ${TEST_NAME}

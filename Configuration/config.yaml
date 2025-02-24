@@ -1,0 +1,35 @@
+# config/config.yaml
+environment:
+  browser: chrome
+  platform: Windows 10
+  tested_by: Bikash Dehury
+  headless: false
+
+urls:
+  base_url: "http://localhost:8080/"
+  login_url: "http://localhost:8080/login"
+  api_base_url: "http://localhost:8080/api"
+
+public_apis:
+  cat_facts: "https://cat-fact.herokuapp.com"
+
+credentials:
+  valid:
+    username: "TestAutomation"
+    password: "TestAutomation"
+  invalid:
+    username: "TestAutomation"
+    password: "wrongpassword"
+  empty:
+    username: ""
+    password: ""
+
+timeouts:
+  page_load: 30000
+  element_wait: 10000
+
+executor:
+  name: "Local Machine"
+  type: "local"
+  url: "http://localhost"
+  build_order: 1

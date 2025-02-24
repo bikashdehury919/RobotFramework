@@ -10,3 +10,4 @@ Expected visited points		Actual visited points		Test result
 MISSING		(4.0, 150.0)		FAIL (Missing expected point)
 MISSING		(-4.23, -150.56)		FAIL (Missing expected point)
 MISSING		(160.0, -150.0)		FAIL (Missing expected point)
+MISSING		()		FAIL (System error)

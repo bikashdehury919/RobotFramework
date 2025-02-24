@@ -1,61 +1,455 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.0.2 (Python 3.11.2 on win32)" generated="20250208 20:33:29.957" rpa="false" schemaversion="3">
-<suite id="s1" name="Test" source="C:\Users\Bikash\PycharmProjects\TestAutomationFramework\Tests\test.robot">
-<test id="s1-t1" name="TC01_Verify Points Are Inside Rectangle" line="9">
-<kw name="Parse the input text file" library="CustomLibrary">
-<var>${rectangle}</var>
-<var>${points}</var>
-<arg>${input_path}</arg>
-<doc>Reads and extracts from the input file.</doc>
-<msg timestamp="20250208 20:33:29.989" level="INFO">${rectangle} = [(-4.0, -150.0), (-4.0, 150.0), (160.0, -150.0), (160.0, 150.0)]</msg>
-<msg timestamp="20250208 20:33:29.989" level="INFO">${points} = [(-3.0, -149.0), (4.0, 150.0), (170.0, 150.0), (150.0, -155.0), (-6.0, 160.0), (-4.0, -150.0), (-4.23, -150.56), (0.045, 0.001)]</msg>
-<status status="PASS" starttime="20250208 20:33:29.989" endtime="20250208 20:33:29.989"/>
+<robot generator="Robot 6.0.2 (Python 3.11.2 on win32)" generated="20250222 23:59:59.794" rpa="false" schemaversion="3">
+<suite id="s1" name="test API" source="C:\Users\Bikash\PycharmProjects\TestAutomationFramework\Tests\test_API.robot">
+<kw name="Create Session For API" type="SETUP">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>api</arg>
+<arg>${API_BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250223 00:00:00.013" level="INFO">Creating Session using : alias=api, url=, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg timestamp="20250223 00:00:00.013" level="DEBUG">Creating session: api</msg>
+<status status="PASS" starttime="20250223 00:00:00.013" endtime="20250223 00:00:00.013"/>
 </kw>
-<kw name="Parse the output text file" library="CustomLibrary">
-<var>${actual_points}</var>
-<arg>${output_path}</arg>
-<doc>Reads the visited points from the output file.</doc>
-<msg timestamp="20250208 20:33:29.989" level="INFO">${actual_points} = [(-3.0, -149.0), (4.0, 150.0), (170.0, 150.0), (0.0, 0.0), 'error', (150.0, -155.0), (-6.0, 160.0), (-4.0, -150.0), (4.0, 150.0), (-4.23, -150.56), (160.0, -150.0)]</msg>
-<status status="PASS" starttime="20250208 20:33:29.989" endtime="20250208 20:33:29.989"/>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>public</arg>
+<arg>${CAT_FACTS_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20250223 00:00:00.021" level="INFO">Creating Session using : alias=public, url=, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<msg timestamp="20250223 00:00:00.021" level="DEBUG">Creating session: public</msg>
+<status status="PASS" starttime="20250223 00:00:00.013" endtime="20250223 00:00:00.021"/>
 </kw>
-<kw name="Validate Points" library="CustomLibrary">
-<var>${results}</var>
-<arg>${points}</arg>
-<arg>${actual_points}</arg>
-<arg>${rectangle}</arg>
-<doc>Validates that the visited points match the expected and stay within the rectangle.</doc>
-<msg timestamp="20250208 20:33:30.005" level="INFO">${results} = {'result': 'FAIL', 'details': ['(-3.0, -149.0)\t\t(-3.0, -149.0)\t\tPASS', '(4.0, 150.0)\t\t(4.0, 150.0)\t\tPASS', '(170.0, 150.0)\t\t(170.0, 150.0)\t\tFAIL (Out of bounds)', '(150.0, -155.0)\t\t(0.0,...</msg>
-<status status="PASS" starttime="20250208 20:33:30.005" endtime="20250208 20:33:30.005"/>
+<status status="PASS" starttime="20250223 00:00:00.013" endtime="20250223 00:00:00.021"/>
+</kw>
+<test id="s1-t1" name="Get Cat Facts" line="17">
+<kw name="Get Config Data">
+<var>${config}</var>
+<arg>${CONFIG_PATH}</arg>
+<kw name="Get File" library="OperatingSystem">
+<var>${content}</var>
+<arg>${path}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<msg timestamp="20250223 00:00:00.024" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\Bikash\PycharmProjects\TestAutomationFramework\configuration\config.yaml"&gt;C:\Users\Bikash\PycharmProjects\TestAutomationFramework\configuration\config.yaml&lt;/a&gt;'.</msg>
+<msg timestamp="20250223 00:00:00.024" level="INFO">${content} = # config/config.yaml
+environment:
+  browser: chrome
+  platform: Windows 10
+  tested_by: Bikash Dehury
+  headless: false
+
+urls:
+  base_url: "http://localhost:8080/"
+  login_url: "http://localhost:8080/...</msg>
+<status status="PASS" starttime="20250223 00:00:00.024" endtime="20250223 00:00:00.024"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${config}</var>
+<arg>yaml.safe_load($content)</arg>
+<arg>yaml</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20250223 00:00:00.029" level="INFO">${config} = {'environment': {'browser': 'chrome', 'platform': 'Windows 10', 'tested_by': 'Bikash Dehury', 'headless': False}, 'urls': {'base_url': 'http://localhost:8080/', 'login_url': 'http://localhost:8080/log...</msg>
+<status status="PASS" starttime="20250223 00:00:00.024" endtime="20250223 00:00:00.029"/>
+</kw>
+<msg timestamp="20250223 00:00:00.029" level="INFO">${config} = {'environment': {'browser': 'chrome', 'platform': 'Windows 10', 'tested_by': 'Bikash Dehury', 'headless': False}, 'urls': {'base_url': 'http://localhost:8080/', 'login_url': 'http://localhost:8080/log...</msg>
+<status status="PASS" starttime="20250223 00:00:00.022" endtime="20250223 00:00:00.029"/>
+</kw>
+<kw name="Set Test Variable" library="BuiltIn">
+<arg>${CAT_FACTS_URL}</arg>
+<arg>${config['public_apis']['cat_facts']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<msg timestamp="20250223 00:00:00.029" level="INFO">${CAT_FACTS_URL} = https://cat-fact.herokuapp.com</msg>
+<status status="PASS" starttime="20250223 00:00:00.029" endtime="20250223 00:00:00.029"/>
+</kw>
+<kw name="Get Request">
+<var>${response}</var>
+<arg>/facts</arg>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>public</arg>
+<arg>${endpoint}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20250223 00:00:00.045" level="FAIL">MissingSchema: Invalid URL '/facts': No scheme supplied. Perhaps you meant https:///facts?</msg>
+<msg timestamp="20250223 00:00:00.119" level="DEBUG">Traceback (most recent call last):
+  File "C:\Users\Bikash\AppData\Local\Programs\Python\Python311\Lib\site-packages\RequestsLibrary\utils.py", line 154, in decorator
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Bikash\AppData\Local\Programs\Python\Python311\Lib\site-packages\RequestsLibrary\RequestsOnSessionKeywords.py", line 31, in get_on_session
+    response = self._common_request("get", session, url,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Bikash\AppData\Local\Programs\Python\Python311\Lib\site-packages\RequestsLibrary\RequestsKeywords.py", line 37, in _common_request
+    resp = method_function(
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\Bikash\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 600, in get
+    return self.request("GET", url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Bikash\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 573, in request
+    prep = self.prepare_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Bikash\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\sessions.py", line 484, in prepare_request
+    p.prepare(
+  File "C:\Users\Bikash\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\models.py", line 368, in prepare
+    self.prepare_url(url, params)
+  File "C:\Users\Bikash\AppData\Local\Programs\Python\Python311\Lib\site-packages\requests\models.py", line 439, in prepare_url
+    raise MissingSchema(
+requests.exceptions.MissingSchema: Invalid URL '/facts': No scheme supplied. Perhaps you meant https:///facts?</msg>
+<status status="FAIL" starttime="20250223 00:00:00.029" endtime="20250223 00:00:00.119"/>
 </kw>
 <kw name="Log" library="BuiltIn">
-<arg>${results}</arg>
+<arg>GET ${endpoint} Response: ${response.json()}</arg>
+<arg>INFO</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20250208 20:33:30.005" level="INFO">{'result': 'FAIL', 'details': ['(-3.0, -149.0)\t\t(-3.0, -149.0)\t\tPASS', '(4.0, 150.0)\t\t(4.0, 150.0)\t\tPASS', '(170.0, 150.0)\t\t(170.0, 150.0)\t\tFAIL (Out of bounds)', '(150.0, -155.0)\t\t(0.0, 0.0)\t\tFAIL (Unexpected point)', '(-6.0, 160.0)\t\terror\t\tFAIL (System error)', '(-4.0, -150.0)\t\t(150.0, -155.0)\t\tFAIL (Out of bounds)', '(-4.23, -150.56)\t\t(-6.0, 160.0)\t\tFAIL (Out of bounds)', '(0.045, 0.001)\t\t(-4.0, -150.0)\t\tFAIL (Unexpected point)', 'MISSING\t\t(4.0, 150.0)\t\tFAIL (Missing expected point)', 'MISSING\t\t(-4.23, -150.56)\t\tFAIL (Missing expected point)', 'MISSING\t\t(160.0, -150.0)\t\tFAIL (Missing expected point)']}</msg>
-<status status="PASS" starttime="20250208 20:33:30.005" endtime="20250208 20:33:30.005"/>
+<status status="NOT RUN" starttime="20250223 00:00:00.119" endtime="20250223 00:00:00.119"/>
 </kw>
-<kw name="Log Result to Text File" library="CustomLibrary">
-<arg>${results}</arg>
-<arg>${TEST_NAME}</arg>
-<doc>Writes the validation results to a file.
-:param results:
-:param TCName:</doc>
-<msg timestamp="20250208 20:33:30.005" level="INFO">Test FAILED. Check test_results_TC01_Verify Points Are Inside Rectangle.txt for details in Reports folder.</msg>
-<status status="PASS" starttime="20250208 20:33:30.005" endtime="20250208 20:33:30.005"/>
+<status status="FAIL" starttime="20250223 00:00:00.029" endtime="20250223 00:00:00.119"/>
 </kw>
-<doc>Validate if points are correctly within the rectangle</doc>
-<status status="PASS" starttime="20250208 20:33:29.989" endtime="20250208 20:33:30.005"/>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" starttime="20250223 00:00:00.119" endtime="20250223 00:00:00.119"/>
+</kw>
+<kw name="Should Be List">
+<arg>${response.json()}</arg>
+<status status="NOT RUN" starttime="20250223 00:00:00.119" endtime="20250223 00:00:00.119"/>
+</kw>
+<kw name="Length Should Be Greater Than">
+<arg>${response.json()}</arg>
+<arg>0</arg>
+<status status="NOT RUN" starttime="20250223 00:00:00.119" endtime="20250223 00:00:00.119"/>
+</kw>
+<kw name="Dictionary Should Contain Key" library="Collections">
+<arg>${response.json()[0]}</arg>
+<arg>text</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20250223 00:00:00.119" endtime="20250223 00:00:00.119"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${sample_fact}</var>
+<arg>${response.json()[0]['text']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20250223 00:00:00.119" endtime="20250223 00:00:00.119"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Sample Cat Fact: ${sample_fact}</arg>
+<arg>INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20250223 00:00:00.119" endtime="20250223 00:00:00.119"/>
+</kw>
+<doc>Test fetching cat facts from a public API using Requests</doc>
+<status status="FAIL" starttime="20250223 00:00:00.021" endtime="20250223 00:00:00.119">MissingSchema: Invalid URL '/facts': No scheme supplied. Perhaps you meant https:///facts?</status>
 </test>
-<doc>Test cases for Robot Framework automation</doc>
-<status status="PASS" starttime="20250208 20:33:29.957" endtime="20250208 20:33:30.005"/>
+<kw name="Delete All Sessions" type="TEARDOWN">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<kw name="Delete All Sessions">
+<msg timestamp="20250223 00:00:00.135" level="FAIL">Maximum limit of started keywords and control structures exceeded.</msg>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.135"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.135"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.135"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.135"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.135"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.135"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.135"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.135"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.135"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.135"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.135"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.135"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.135" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.119" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.119" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.119" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.119" endtime="20250223 00:00:00.151"/>
+</kw>
+<status status="FAIL" starttime="20250223 00:00:00.119" endtime="20250223 00:00:00.166">Maximum limit of started keywords and control structures exceeded.</status>
+</kw>
+<doc>API Test Scenarios using Requests</doc>
+<status status="FAIL" starttime="20250222 23:59:59.794" endtime="20250223 00:00:00.166">Suite teardown failed:
+Maximum limit of started keywords and control structures exceeded.</status>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="Test">Test</stat>
+<stat pass="0" fail="1" skip="0" id="s1" name="test API">test API</stat>
 </suite>
 </statistics>
 <errors>

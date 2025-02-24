@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Test" tests="1" errors="0" failures="0" skipped="0" time="0.048" timestamp="2025-02-08T20:33:29.957000">
-<testcase classname="Test" name="TC01_Verify Points Are Inside Rectangle" time="0.016">
+<testsuite name="test API" tests="1" errors="0" failures="1" skipped="0" time="0.372" timestamp="2025-02-22T23:59:59.794000">
+<testcase classname="test API" name="Get Cat Facts" time="0.098">
+<failure message="MissingSchema: Invalid URL '/facts': No scheme supplied. Perhaps you meant https:///facts?&#10;&#10;Also parent suite teardown failed:&#10;Maximum limit of started keywords and control structures exceeded." type="AssertionError"/>
 </testcase>
 <properties>
-<property name="Documentation" value="Test cases for Robot Framework automation"/>
+<property name="Documentation" value="API Test Scenarios using Requests"/>
 </properties>
 </testsuite>

@@ -54,6 +54,8 @@ class CustomLibrary:
                 actual_points.append(tuple(map(float, match)))
             elif "error" in line.lower():
                 actual_points.append("error")
+            else:
+                actual_points.append(())
 
         return actual_points
 
@@ -81,8 +83,10 @@ class CustomLibrary:
         for i in range(max_len):
             exp = expected_points[i] if i < len(expected_points) else "MISSING"
             act = actual_points[i] if i < len(actual_points) else "EXTRA"
-
             if act == "error":
+                results.append(f"{exp}\t\t{act}\t\tFAIL (System error)")
+                pass_criteria = False
+            elif act == ():
                 results.append(f"{exp}\t\t{act}\t\tFAIL (System error)")
                 pass_criteria = False
             elif act == "EXTRA":

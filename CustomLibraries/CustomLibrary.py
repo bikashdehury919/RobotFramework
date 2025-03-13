@@ -2,10 +2,15 @@
 from robot.api.deco import library, keyword
 from robot.libraries.BuiltIn import BuiltIn
 import re
+import pandas as pd
+import cv2
+import time
 
 
 @library
 class CustomLibrary:
+    def __init__(self):
+        self.selLib = BuiltIn().get_library_instance("SeleniumLibrary")
 
     @keyword('Parse the input text file')
     def parse_file(self, filename):
@@ -108,17 +113,59 @@ class CustomLibrary:
         return {"result": result_status, "details": results}
 
     @keyword('Log Result to Text File')
-    def log_results_to_file(self,results,tcName):
+    def log_results_to_file(self, results, tcName):
         """Writes the validation results to a file.
         :param results:
         :param TCName:
         """
-        RESULT_FILE = "Reports/test_results_"+tcName+".txt"
+        RESULT_FILE = "Reports/test_results_" + tcName + ".txt"
         with open(RESULT_FILE, "w") as file:
             file.write("Expected visited points\t\tActual visited points\t\tTest result\n")
             file.write("\n".join(results["details"]))
 
         if results["result"] == "FAIL":
-            print("Test FAILED. Check test_results_"+tcName+".txt for details in Reports folder.")
+            print("Test FAILED. Check test_results_" + tcName + ".txt for details in Reports folder.")
         else:
             print("Test PASSED.")
+
+    @keyword
+    def get_data_from_input_sheet(self, TCName, inputPath):
+        # inputPath=  r"../Resource/NAM/InputData.xlsx"
+        inputdict = {}
+        try:
+            df_tclist = pd.read_excel(inputPath, engine='openpyxl', dtype=object)
+            df_tclist.fillna('Nil', inplace=True)
+            out_frame = pd.DataFrame(df_tclist)
+            inputData = out_frame.to_dict('index')
+
+            for i in inputData.items():
+                if i[1]['TCName'] == TCName:
+                    inputdict = i[1]
+            if inputdict == {}:
+                raise Exception("Failed in Fetching the data from input sheet")
+        except Exception as e:
+            raise Exception("Failed in Fetching the data from input sheet")
+        return inputdict
+
+    @keyword
+    def page_should_have_image(self, filename, similarity=0.8):
+        time.sleep(1)
+        similarity = float(similarity)
+        self.selLib.driver.save_screenshot('./Screenshots/image.png')
+        image = cv2.imread('./Screenshots/image.png')
+        # image = cv2.imread('.Screenshots/Screenshots/image.png')
+        template = cv2.imread(filename)
+        result = cv2.matchTemplate(image, template, cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+        assert max_val >= similarity, \
+            'Template not found ({} < {})'.format(max_val, similarity)
+        return (int(max_loc[0] + template.shape[1] / 2),
+                int(max_loc[1] + template.shape[0] / 2))
+
+    @keyword
+    def click_on_image(self, filename, similarity=0.8):
+        x, y = self.page_should_have_image(filename, similarity)
+
+        el = self.selLib.driver.execute_script(
+            'return document.elementFromPoint({}, {});'.format(x, y))
+        el.click()

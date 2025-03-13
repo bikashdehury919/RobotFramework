@@ -65,3 +65,57 @@ Is Point Inside Rectangle
 Log To File
     [Arguments]    ${message}
     Append To File    .Reports/test_results_${test_name}.txt    ${message}\n
+
+Open Browser and maximize window
+    [Documentation]    Reusable keyword which will open the browser and maximize the window
+    [Arguments]    ${URL}    ${Browser}
+    open browser     ${URL}    ${Browser}
+    maximize browser window
+
+
+Capture Page Screenshot With Test Name
+    [Documentation]    Reusable keyword which will save the sceenshot as ${TEST_NAME}_Screenshot_{index}.png
+    [Arguments]    ${capture_prefix}=${TEST_NAME}
+    Capture Page Screenshot    ${capture_prefix}_Screenshot_{index}.png
+
+Wait untill locator Element is Visible
+    [Arguments]    ${path}    ${timeout}=20s    ${retry_time}=40s    ${retry_interval}=5s
+    [Documentation]    Keyword searches and click xpath element. Retry time and interval can be set also.
+    Wait Until Element Is Visible    ${path}    ${timeout}
+
+Check if element is present then input text
+    [Arguments]    ${element}     ${value}
+    [Documentation]    Keyword searches and input the text as ${value} identified by   ${element}
+    ${IsElementVisible}=  Run Keyword And Return Status    Wait untill locator Element is Visible   ${element}
+    Run Keyword If    ${IsElementVisible}    input text    ${element}    ${value}
+...    ELSE
+...    Fail    the screen has changed
+
+Clear Text Field
+  [Arguments]  ${inputField}
+  press keys  ${inputField}  CTRL+a+BACKSPACE
+
+Check if element is present then clear text
+    [Arguments]    ${element}
+    [Documentation]    Keyword searches and clear the element text identified by   ${element}
+    ${IsElementVisible}=  Run Keyword And Return Status    Wait untill locator Element is Visible   ${element}
+    Run Keyword If    ${IsElementVisible}    Clear Text Field    ${element}
+
+Check if element is present then click element
+    [Arguments]    ${element}
+    ${IsElementVisible}=  Run Keyword And Return Status    Wait untill locator Element is Visible   ${element}
+    Run Keyword If    ${IsElementVisible}    click element    ${element}
+
+Get text and verify with input value
+    [Arguments]    ${locator}    ${textvalue}
+    ${value}=    get text    ${locator}
+    should be equal as strings    ${value}     ${textvalue}
+
+
+Clear text from Input filed and put new input
+    [Arguments]    ${locator}    ${textvalue}
+    Check if element is present then clear text    ${locator}
+    check if element is present then input text    ${locator}    ${textvalue}
+
+Closes the Current Browser
+    close browser

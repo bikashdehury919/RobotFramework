@@ -3,14 +3,17 @@ from robot.api.deco import library, keyword
 from robot.libraries.BuiltIn import BuiltIn
 import re
 import pandas as pd
-import cv2
 import time
+import cv2
 
 
 @library
 class CustomLibrary:
     def __init__(self):
-        self.selLib = BuiltIn().get_library_instance("SeleniumLibrary")
+        try:
+            self.selLib = BuiltIn().get_library_instance("SeleniumLibrary")
+        except RuntimeError:
+            raise RuntimeError("CustomLibrary requires SeleniumLibrary. Please import it in your .robot file first.")
 
     @keyword('Parse the input text file')
     def parse_file(self, filename):

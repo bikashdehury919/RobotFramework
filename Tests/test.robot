@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation    Test cases for Robot Framework automation
 
+Library    SeleniumLibrary
 Library           ../CustomLibraries/CustomLibrary.py
 Resource          ../Configuration/Config.robot
 

@@ -1,9 +1,12 @@
 # config/config.yaml
+browser:
+  name: chrome
+  headless: false
+  incognito: true
+
 environment:
-  browser: chrome
   platform: Windows 10
   tested_by: Bikash Dehury
-  headless: false
 
 urls:
   base_url: "http://localhost:8080/"

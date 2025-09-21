@@ -6,6 +6,15 @@ Library          OperatingSystem
 Library          BuiltIn
 
 *** Keywords ***
+Get Config Data
+    [Arguments]    ${path}
+    ${exists}=    Run Keyword And Return Status    File Should Exist    ${path}
+    Run Keyword If    not ${exists}    Fail    Config file not found at path: ${path}
+    ${content}=    Get File    ${path}
+    ${config}=    Evaluate    __import__('yaml').safe_load('''${content}''')
+    [Return]    ${config}
+
+
 Read Input File
     [Arguments]    ${file_path}
     ${data}    Get File    ${file_path}

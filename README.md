@@ -86,6 +86,8 @@ pip install robotframework-seleniumlibrary
 pip install robotframework-requests
 pip install robotframework-databaselibrary
 ```
+**Sample Code in Pycharm Editor**
+<img width="1887" height="957" alt="image" src="https://github.com/user-attachments/assets/2470ae1e-d4dc-4871-9b71-e8619a53a9f9" />
 
 ### 3. Integrate to jenkins
 ![image](https://github.com/user-attachments/assets/5d5ac296-3548-453d-ae41-fdaca104f9ee)
